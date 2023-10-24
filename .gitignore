@@ -2,6 +2,9 @@
 .env.dev
 .env.test
 
+# db files
+*.sqlite
+
 # compiled output
 /dist
 /node_modules
