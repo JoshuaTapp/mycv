@@ -3,7 +3,8 @@
 .env.test
 
 # db files
-*.sqlite
+db.sqlite
+test.sqlite
 
 # compiled output
 /dist
