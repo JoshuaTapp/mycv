@@ -9,6 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/user.entity';
 import { Report } from './reports/reports.entity';
 import { TypeOrmConfigService } from './config/typeorm.config';
+import { InspectorsService } from './inspectors/inspectors.service';
+import { InspectorsController } from './inspectors/inspectors.controller';
 const cookieSession = require('cookie-session');
 
 @Module({
@@ -24,7 +26,7 @@ const cookieSession = require('cookie-session');
     UsersModule,
     ReportsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, InspectorsController],
   providers: [
     AppService,
     // how to set up a globally scoped pipe
@@ -34,6 +36,7 @@ const cookieSession = require('cookie-session');
         whitelist: true,
       }),
     },
+    InspectorsService,
   ],
 })
 export class AppModule {
