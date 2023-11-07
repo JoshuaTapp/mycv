@@ -1,7 +1,8 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { CreateInspectorDto } from './create-inspector.dto';
 import { IsEmail, IsString, IsOptional } from 'class-validator';
 
-export class UpdateInspectorDto {
+export class UpdateInspectorDto extends PartialType(CreateInspectorDto) {
   @IsEmail()
   @IsOptional()
   email: string;

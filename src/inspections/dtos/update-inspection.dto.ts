@@ -1,46 +1,22 @@
+import { PartialType } from '@nestjs/mapped-types';
 import {
-  IsInt,
-  IsDateString,
   IsOptional,
+  IsDateString,
+  IsInt,
   IsArray,
-  ArrayMinSize,
-  IsString,
-  IsObject,
   ValidateNested,
 } from 'class-validator';
+import { CreateInspectionDto, ChecklistItemDto } from './create-inspection.dto';
 import { Type } from 'class-transformer';
 
-export class ChecklistItemDto {
-  @IsString()
-  item: string;
-
-  @IsString()
-  status: 'pass' | 'fail';
-
+export class UpdateInspectionDto extends PartialType(CreateInspectionDto) {
   @IsOptional()
-  @IsString()
-  explanation?: string;
-
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  picturesUrls?: string[];
-
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  videosUrls?: string[];
-}
-
-export class CreateInspectionDto {
-  @IsInt()
-  inspectorID: number;
-
   @IsDateString()
-  dateTime: Date;
+  dateTime?: Date;
 
+  @IsOptional()
   @IsInt()
-  homeId: number;
+  homeId?: number;
 
   @IsOptional()
   @IsArray()

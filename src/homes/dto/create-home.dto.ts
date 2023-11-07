@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsArray, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateHomeDto {
   @IsString()
@@ -14,5 +14,12 @@ export class CreateHomeDto {
   state: string;
 
   @IsString()
+  @MinLength(5, { message: 'zip is too short' })
+  @MaxLength(5, { message: 'zip is too long' })
   zip: string;
+
+  // todo: init as empty array
+  @IsString({ each: true })
+  @IsArray()
+  inspectors: string[];
 }

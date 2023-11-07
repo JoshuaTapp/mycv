@@ -7,12 +7,8 @@ import {
   ArrayMinSize,
   IsNumber,
 } from 'class-validator';
-import { District } from 'src/districts/district.entity';
 
 export class CreateInspectorDto {
-  @IsNumber()
-  id: number;
-
   @IsString()
   firstName: string;
 
@@ -41,8 +37,4 @@ export class CreateInspectorDto {
   @IsOptional()
   @IsInt()
   electricalLevel: number;
-
-  @IsArray()
-  @ArrayMinSize(1)
-  districts: District[];
 }

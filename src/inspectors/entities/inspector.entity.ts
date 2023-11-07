@@ -5,8 +5,8 @@ import {
   OneToMany,
   ManyToMany,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
-import { District } from '../districts/district.entity';
 import { User } from 'src/users/user.entity';
 
 @Entity()
@@ -23,7 +23,7 @@ export class Inspector {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
 
   @Column({ type: 'int', nullable: true })
@@ -38,9 +38,7 @@ export class Inspector {
   @Column({ type: 'int', nullable: true })
   electricalLevel: number;
 
-  @ManyToMany(() => District, (district) => district.inspectors)
-  districts: District[];
-
-  @OneToOne(() => User)
+  @OneToOne(() => User, (user) => user.inspector)
+  @JoinColumn()
   user: User;
 }

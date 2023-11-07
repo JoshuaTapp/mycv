@@ -6,11 +6,13 @@ import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from './users/user.entity';
-import { Report } from './reports/reports.entity';
 import { TypeOrmConfigService } from './config/typeorm.config';
-import { InspectorsService } from './inspectors/inspectors.service';
 import { InspectorsController } from './inspectors/inspectors.controller';
+import { HomesController } from './homes/homes.controller';
+import { HomesModule } from './homes/homes.module';
+import { InspectionsController } from './inspections/inspections.controller';
+import { InspectionsModule } from './inspections/inspections.module';
+import { InspectorsModule } from './inspectors/inspectors.module';
 const cookieSession = require('cookie-session');
 
 @Module({
@@ -25,8 +27,17 @@ const cookieSession = require('cookie-session');
     }),
     UsersModule,
     ReportsModule,
+    HomesModule,
+    InspectionsModule,
+    InspectorsModule,
   ],
-  controllers: [AppController, InspectorsController],
+  controllers: [
+    AppController,
+    InspectorsController,
+    HomesController,
+    InspectionsController,
+    InspectorsController,
+  ],
   providers: [
     AppService,
     // how to set up a globally scoped pipe
@@ -36,7 +47,6 @@ const cookieSession = require('cookie-session');
         whitelist: true,
       }),
     },
-    InspectorsService,
   ],
 })
 export class AppModule {

@@ -1,17 +1,45 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Inspector } from './inspector.entity';
+import { Inspector } from './entities/inspector.entity';
+import { CreateInspectorDto } from './dtos/create-inspector.dto';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class InspectorsService {
+  @Inject(UsersService)
+  private readonly usersService: UsersService;
+
   constructor(
     @InjectRepository(Inspector)
     private inspectorsRepository: Repository<Inspector>,
   ) {}
 
-  // create a new inspector
-  create(inspector: Inspector): Promise<Inspector> {
+  async create(createInspectorDto: CreateInspectorDto): Promise<Inspector> {
+    // if first or last name are not provided, throw an error
+    if (!createInspectorDto.firstName || !createInspectorDto.lastName) {
+      throw new BadRequestException('First and last name are required');
+    }
+
+    const user = await this.usersService.findOneByEmail(
+      createInspectorDto.email,
+    );
+
+    // TODO: create a new user with the email provided if it doesn't exist
+    if (!user) {
+      throw new NotFoundException('User with this email does not exist');
+    }
+
+    const inspector =
+      await this.inspectorsRepository.create(createInspectorDto);
+
+    inspector.user = user;
+
     return this.inspectorsRepository.save(inspector);
   }
 

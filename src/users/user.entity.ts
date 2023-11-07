@@ -1,3 +1,4 @@
+import { Inspector } from '../inspectors/entities/inspector.entity';
 import { Report } from '../reports/reports.entity';
 import {
   AfterInsert,
@@ -7,6 +8,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 
 @Entity()
@@ -25,6 +27,9 @@ export class User {
 
   @OneToMany(() => Report, (report) => report.user)
   reports: Report[];
+
+  @OneToOne(() => Inspector, (inspector) => inspector.user)
+  inspector: Inspector;
 
   /*
     logging functions

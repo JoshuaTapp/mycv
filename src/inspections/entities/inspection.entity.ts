@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Home } from '../homes/home.entity';
+import { Home } from '../../homes/entities/home.entity';
 
 @Entity()
 export class Inspection {
