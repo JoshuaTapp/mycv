@@ -36,8 +36,12 @@ export class HomesService {
       throw new NotFoundException('home not found');
     }
 
-    Object.assign(home, updateHomeDto);
-    return this.homeRepo.save(home);
+    const updatedHome = {
+      ...home,
+      ...updateHomeDto,
+    };
+
+    return this.homeRepo.save(updatedHome);
   }
 
   async remove(id: number): Promise<Home> {
