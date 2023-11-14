@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateInspectorDto } from './create-inspector.dto';
-import { IsEmail, IsString, IsOptional } from 'class-validator';
+import { IsEmail, IsString, IsOptional, IsInt } from 'class-validator';
 
 export class UpdateInspectorDto extends PartialType(CreateInspectorDto) {
   @IsEmail()
@@ -20,18 +20,18 @@ export class UpdateInspectorDto extends PartialType(CreateInspectorDto) {
   phoneNumber: string;
 
   @IsOptional()
-  @IsString()
+  @IsInt()
   fireLevel: number;
 
   @IsOptional()
-  @IsString()
+  @IsInt()
   structuralLevel: number;
 
   @IsOptional()
-  @IsString()
+  @IsInt()
   plumbingLevel: number;
 
   @IsOptional()
-  @IsString()
+  @IsInt()
   electricalLevel: number;
 }

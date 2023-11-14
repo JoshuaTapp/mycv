@@ -34,13 +34,14 @@ export class InspectorsService {
     if (!user) {
       throw new NotFoundException('User with this email does not exist');
     }
-
-    const inspector =
-      await this.inspectorsRepository.create(createInspectorDto);
-
+    console.log('before create inspector');
+    const inspector = this.inspectorsRepository.create(createInspectorDto);
+    console.log('after create inspector');
     inspector.user = user;
-
-    return this.inspectorsRepository.save(inspector);
+    console.log('after inspector.user = user');
+    const obj = this.inspectorsRepository.save(inspector);
+    console.log('after save');
+    return obj;
   }
 
   findAll(): Promise<Inspector[]> {
@@ -51,6 +52,7 @@ export class InspectorsService {
     if (!id) {
       return null;
     }
+    console.log('id', id);
     return this.inspectorsRepository.findOneBy({ id });
   }
 

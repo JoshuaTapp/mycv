@@ -30,6 +30,5 @@ export class InspectorDto {
   electricalLevel: number;
 
   @Expose()
-  @Transform(({ obj }) => obj.user.id)
   userId: User;
 }

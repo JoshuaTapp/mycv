@@ -1,4 +1,10 @@
-import { IsArray, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsArray,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateHomeDto {
   @IsString()
@@ -21,5 +27,6 @@ export class CreateHomeDto {
   // todo: init as empty array
   @IsString({ each: true })
   @IsArray()
+  @IsOptional()
   inspectors: string[];
 }

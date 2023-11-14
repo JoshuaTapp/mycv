@@ -20,6 +20,7 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 import { AuthGuard } from '../guards/auth.guard';
+// import { generateUsers } from '../../utils/generateData';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -62,6 +63,22 @@ export class UsersController {
     }
     return user;
   }
+
+  // @Get('/generate-random-users/:numUsers')
+  // async generateRandomUsers(@Param('numUsers') numUsers: number) {
+  //   const users = await generateUsers(numUsers);
+  //   const usersDto = users.map((user) => {
+  //     const createUserDto = new CreateUserDto();
+  //     createUserDto.email = user.email;
+  //     createUserDto.password = user.password;
+  //     createUserDto.admin = user.admin;
+  //     return createUserDto;
+  //   });
+
+  //   usersDto.forEach(async (userDto) => {
+  //     await this.createUser(userDto, { userId: null });
+  //   });
+  // }
 
   @Get()
   findAllUsers(@Query('email') email: string) {

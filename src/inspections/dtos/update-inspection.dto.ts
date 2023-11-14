@@ -2,9 +2,9 @@ import { PartialType } from '@nestjs/mapped-types';
 import {
   IsOptional,
   IsDateString,
-  IsInt,
   IsArray,
   ValidateNested,
+  IsNumber,
 } from 'class-validator';
 import { CreateInspectionDto, ChecklistItemDto } from './create-inspection.dto';
 import { Type } from 'class-transformer';
@@ -15,7 +15,7 @@ export class UpdateInspectionDto extends PartialType(CreateInspectionDto) {
   dateTime?: Date;
 
   @IsOptional()
-  @IsInt()
+  @IsNumber()
   homeId?: number;
 
   @IsOptional()

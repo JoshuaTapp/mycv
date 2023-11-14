@@ -1,15 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 import { Home } from '../../homes/entities/home.entity';
+import { Inspector } from '../../inspectors/entities/inspector.entity';
 
 @Entity()
 export class Inspection {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  inspectorID: number;
-
-  @Column()
+  @CreateDateColumn()
   dateTime: Date;
 
   @Column({ type: 'json', nullable: true })
@@ -49,5 +55,9 @@ export class Inspection {
   }[];
 
   @ManyToOne(() => Home, (home) => home.inspections)
+  @JoinColumn({ name: 'homeId', referencedColumnName: 'id' })
   home: Home;
+
+  @ManyToOne(() => Inspector, (inspector) => inspector.inspections)
+  inspector: Inspector;
 }

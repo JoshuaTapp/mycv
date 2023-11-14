@@ -7,6 +7,7 @@ import {
   IsString,
   IsObject,
   ValidateNested,
+  IsNumber,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -33,13 +34,10 @@ export class ChecklistItemDto {
 }
 
 export class CreateInspectionDto {
-  @IsInt()
-  inspectorID: number;
+  @IsNumber()
+  inspectorId: number;
 
-  @IsDateString()
-  dateTime: Date;
-
-  @IsInt()
+  @IsNumber()
   homeId: number;
 
   @IsOptional()

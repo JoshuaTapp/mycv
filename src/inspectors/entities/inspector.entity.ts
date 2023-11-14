@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
+import { Inspection } from '../../inspections/entities/inspection.entity';
 
 @Entity()
 export class Inspector {
@@ -41,4 +42,10 @@ export class Inspector {
   @OneToOne(() => User, (user) => user.inspector)
   @JoinColumn()
   user: User;
+
+  @OneToMany(() => Inspection, (inspection) => inspection.inspector, {
+    eager: true,
+    cascade: true,
+  })
+  inspections: Inspection[];
 }

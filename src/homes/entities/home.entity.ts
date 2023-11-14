@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  AfterInsert,
+} from 'typeorm';
 import { Inspection } from '../../inspections/entities/inspection.entity';
 
 @Entity()
@@ -9,7 +15,7 @@ export class Home {
   @Column()
   addressField1: string;
 
-  @Column()
+  @Column({ nullable: true })
   addressField2: string;
 
   @Column()
@@ -21,6 +27,9 @@ export class Home {
   @Column()
   zip: string;
 
-  @OneToMany(() => Inspection, (inspection) => inspection.home)
+  @OneToMany(() => Inspection, (inspection) => inspection.home, {
+    cascade: true,
+    eager: true,
+  })
   inspections: Inspection[];
 }
